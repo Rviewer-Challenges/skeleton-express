@@ -41,17 +41,8 @@ jobs:
 
       - name: Generate API coverage
         run: |
-          cd api
           yarn install
           yarn test --coverage
-        env:
-          CI: true
-
-      - name: Generate webapp coverage
-        run: |
-          cd webapp
-          yarn install
-          yarn coverage
         env:
           CI: true
 
