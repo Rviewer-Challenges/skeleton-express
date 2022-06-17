@@ -15,7 +15,7 @@ on:
 
 jobs:
   secrets-gate:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: self-hosted
     outputs:
       ok: ${{ steps.check-secrets.outputs.ok }}
     steps:
@@ -27,7 +27,7 @@ jobs:
           fi
           
   sonarqube:
-    runs-on: [self-hosted, linux, ARM64]
+    runs-on: self-hosted
     needs:
         - secrets-gate
     if: ${{ needs.secrets-gate.outputs.ok == 'true' }}
