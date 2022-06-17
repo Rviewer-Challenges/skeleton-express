@@ -38,6 +38,9 @@ jobs:
         with:
           node-version: '16'
           cache: 'yarn'
+      
+      - name: Install yarn
+        run: npm i -g yarn
 
       - name: Generate API coverage
         run: |
