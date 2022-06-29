@@ -1,7 +1,7 @@
 import request from 'supertest';
 
 import app from "../../src/app";
-import { Pong } from "../../src/domain/pong"
+import { Pong } from "../../src/domain/pong.js"
 
 
 describe('GET /ping', () => {
