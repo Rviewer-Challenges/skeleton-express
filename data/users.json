@@ -1,0 +1,53 @@
+[
+    {
+        "id": "aaaa00",
+        "name": "John Smith",
+        "password": "unsecuredPassword1234",
+        "playlists": [
+            {
+                "id": "00001",
+                "name": "pl1",
+                "songs" : [
+                    {
+                        "0": "song1",
+                        "1": "song2"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "aaaa01",
+        "name": "Laurel Fitz",
+        "password": "abcdef1234",
+        "playlists": [
+            {
+                "id": "00002",
+                "name": "pl2",
+                "songs" : [
+                    {
+                        "0": "song1",
+                        "1": "song2"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "aaaa02",
+        "name": "Daniel Schmitz",
+        "password": "qwertyqwerty",
+        "playlist": [
+            {
+                "id": "00003",
+                "name": "pl3",
+                "songs" : [
+                    {
+                        "0": "song1",
+                        "1": "song2"
+                    }
+                ]
+            }
+        ]
+    }
+]

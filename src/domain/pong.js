@@ -2,7 +2,7 @@ export class Pong {
     _message
 
     constructor() {
-        this._message = 'pong'
+        this._message = 'pongggg'
     }
 
     unmarshal() {
