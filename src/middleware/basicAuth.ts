@@ -16,7 +16,7 @@ export async function basicAuth(req, res, next) {
     if (strength !== "Strong") {
         return res.status(403).json({message: 'Please use a stronger password'})
     }
-    const user = UserService.authenticate({ username, password });
+    const user = await UserService.authenticate({ username, password });
     if (!user) {
         return res.status(401).json({ code: 401, message: 'Invalid Authentication Credentials' });
     }
