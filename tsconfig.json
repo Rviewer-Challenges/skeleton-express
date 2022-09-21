@@ -13,8 +13,8 @@
     "resolveJsonModule": true,
     "noImplicitAny": false
   },
-  "files":["./src/custom.d.ts"],
+  "files": ["./src/custom.d.ts"],
   "include": [
-    "src"
-  ]
+    "src", "tests/controllers/users.controller.spec.ts"
+, "tests/services/user.service.spec.ts"  ]
 }

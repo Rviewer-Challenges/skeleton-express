@@ -1,53 +1,40 @@
-[
-    {
-        "id": "aaaa00",
+[{
+        "id": "8ef8d13a-7d75-4efb-867a-908db4b05ea4",
         "name": "John Smith",
         "password": "!unsecu@edPard1234",
-        "playlists": [
-            {
-                "id": "00001",
-                "name": "pl1",
-                "songs" : [
-                    {
-                        "0": "song1",
-                        "1": "song2"
-                    }
-                ]
-            }
-        ]
+        "playlists": [{
+            "id": "0c5d0065-397f-4743-906a-57a4d8da768f",
+            "name": "pl1",
+            "songs": [{
+                "artist": "artist1",
+                "title": "title1"
+            }]
+        }]
     },
     {
-        "id": "aaaa01",
+        "id": "c37fa9d9-bead-43cd-92eb-8a20410396cd",
         "name": "Laurel Fitz",
         "password": "abcdef1234",
-        "playlists": [
-            {
-                "id": "00002",
-                "name": "pl2",
-                "songs" : [
-                    {
-                        "0": "song1",
-                        "1": "song2"
-                    }
-                ]
-            }
-        ]
+        "playlists": [{
+            "id": "a256dcbe-da8b-4bcc-b4da-73eb2f978bc6",
+            "name": "pl2",
+            "songs": [{
+                "0": "song1",
+                "1": "song2"
+            }]
+        }]
     },
     {
-        "id": "aaaa02",
+        "id": "55a23428-d943-46e5-86ae-b49de67058c3",
         "name": "Daniel Schmitz",
         "password": "qwertyqwerty",
-        "playlist": [
-            {
-                "id": "00003",
-                "name": "pl3",
-                "songs" : [
-                    {
-                        "0": "song1",
-                        "1": "song2"
-                    }
-                ]
-            }
-        ]
+        "playlist": [{
+            "id": "b405dc04-9f1c-45d0-a247-b0e4c88758fe",
+            "name": "pl3",
+            "songs": [{
+                "0": "song1",
+                "1": "song2"
+            }]
+        }]
     }
 ]

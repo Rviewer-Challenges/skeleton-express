@@ -1,6 +1,6 @@
 
 
 export class Song {
-    readonly Artist: string;
-    readonly Title: string;
+    readonly artist: string;
+    readonly title: string;
 }

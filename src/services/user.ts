@@ -30,21 +30,21 @@ export class UserService {
         return await user.playlists;
     }
 
-    async getPlaylistById(user: User, listId, currentUser?: string): Promise<Playlist> {
+    async getPlaylistById(user: User, listId): Promise<Playlist> {
         const playlist = await user.playlists.find((pl) => pl.id === listId);
         if (!playlist) return { code: 401, message: `User has no playlist with id ${listId}` } as any
 
         return playlist;
     }
 
-    async createNewPlaylist(user: User, playlist: Playlist): Promise<User> {
-        const newPlaylist: Playlist = { id: uuidv4, ...playlist }
+    async createNewPlaylist(user: User, playlist: Playlist): Promise<Playlist> {
+        const newPlaylist: Playlist = { id: uuidv4(), ...playlist }
         await user.playlists.push(newPlaylist);
 
-        return user;
+        return newPlaylist;
     }
 
-    async addSongToList(user: User, listId: string, song: Song): Promise<Playlist> {
+    async addSongToList(user: User, listId: string, song: Song): Promise<Song> {
         const playlist = user.playlists.find((pl) => pl.id === listId);
         if (!playlist) return { code: 401, message: `User has no playlist with id ${listId}` } as any
 
@@ -52,6 +52,6 @@ export class UserService {
 
         playlist.songs.push(newSong);
 
-        return playlist;
+        return newSong;
     }
 }
