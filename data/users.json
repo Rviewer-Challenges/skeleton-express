@@ -19,8 +19,8 @@
             "id": "a256dcbe-da8b-4bcc-b4da-73eb2f978bc6",
             "name": "pl2",
             "songs": [{
-                "0": "song1",
-                "1": "song2"
+                "artist": "artist1",
+                "title": "title1"
             }]
         }]
     },
@@ -32,8 +32,8 @@
             "id": "b405dc04-9f1c-45d0-a247-b0e4c88758fe",
             "name": "pl3",
             "songs": [{
-                "0": "song1",
-                "1": "song2"
+                "artist": "artist1",
+                "title": "title1"
             }]
         }]
     }
