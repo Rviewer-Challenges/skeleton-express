@@ -1,90 +1,74 @@
-import { Login } from '../domain/login';
 import { Playlist } from '../domain/playlist';
 import { Song } from '../domain/song';
 import { User } from '../domain/user';
-
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcryptjs");
-var uuid = require('uuid');
+import { v4 as uuidv4 } from 'uuid';
 
 const userDatabase = require('../../data/users.json');
 
 export class UserService {
 
-    login(login: Login): any {
-        const { username, password } = login;
+    static authenticate({ username, password }) {
 
-        const user = userDatabase.find((user) => user.name === username);
+        const user = userDatabase.find((user) => user.name === username && user.password === password);
 
-        if (!user) throw new Error('No user found with this username');
-
-        const passwordIsValid = bcrypt.compare(
-            password,
-            user.password
-        );
-
-        if (!passwordIsValid) {
-            throw new Error('Invalid password');
+        if (user) {
+            const { password, ...userWithoutPassword } = user;
+            return userWithoutPassword;
         }
-
-        const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET)
-
-        return token;
     }
 
-    getAllUsers(): User[] {
+    // getUserById(currentUser: string, id: string): User {
+    //     if (currentUser !== id) return { code: 401, message: 'You are not authorized.' } as any;
 
-        let users: User[] = [];
-        userDatabase.forEach((entry) => {
-            let user: User = entry;
-            users.push(user);
-        });
+    //     const user = userDatabase.find((user) => user.id === id);
 
-        return users;
-    }
+    //     if (!user) return { code: 401, message: "User not found with this id" } as any;
 
-    getUserById(id: string): User {
-        // validate id
+    //     return user;
+    // }
+
+    getPlaylists(currentUser: string, id: string): Playlist[] {
+        if (currentUser !== id) return { code: 401, message: 'You are not authorized.' } as any;
+
         const user = userDatabase.find((user) => user.id === id);
-
-        if (!user) throw new Error('User not found');
-
-        return user;
-    }
-
-    getPlaylists(id: string): Playlist[] {
-        // validate id
-        const user = this.getUserById(id);
+        if (!user) return { code: 401, message: "User not found with this id" } as any;
 
         return user.playlists;
     }
 
-    getPlaylistById(userId: string, listId): Playlist {
-        // validate id
-        const user = this.getUserById(userId);
+    getPlaylistById(userId: string, listId, currentUser?: string): Playlist {
+        if (currentUser !== userId) return { code: 401, message: 'You are not authorized.' } as any;
+
+        const user = userDatabase.find((user) => user.id === userId);
+        if (!user) return { code: 401, message: "User not found with this id" } as any;
 
         const playlist = user.playlists.find((pl) => pl.id === listId);
-
-        if (!playlist) throw new Error(`User has no playlist with id ${listId}`);
+        if (!playlist) return { code: 401, message: `User has no playlist with id ${listId}` } as any
 
         return playlist;
 
     }
 
-    createNewPlaylist(userId: string, playlist: Playlist): User {
+    createNewPlaylist(currentUser: string, userId: string, playlist: Playlist): User {
+        if (currentUser !== userId) return { code: 401, message: 'You are not authorized.' } as any;
 
-        const user = this.getUserById(userId);
+        const user = userDatabase.find((user) => user.id === userId);
+        if (!user) return { code: 401, message: "User not found with this id" } as any;
 
-        const newPlaylist: Playlist = { id: uuid.v1(), ...playlist }
-
+        const newPlaylist: Playlist = { id: uuidv4, ...playlist }
         user.playlists.push(newPlaylist);
 
         return user;
     }
 
-    addSongToList(userId: string, listId: string, song: Song): Playlist {
+    addSongToList(currentUser: string, userId: string, listId: string, song: Song): Playlist {
+        if (currentUser !== userId) return { code: 401, message: 'You are not authorized.' } as any;
 
-        let playlist = this.getPlaylistById(userId, listId)
+        const user = userDatabase.find((user) => user.id === userId);
+        if (!user) return { code: 401, message: "User not found with this id" } as any;
+
+        const playlist = user.playlists.find((pl) => pl.id === listId);
+        if (!playlist) return { code: 401, message: `User has no playlist with id ${listId}` } as any
 
         const newSong: Song = { ...song }
 

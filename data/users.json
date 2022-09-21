@@ -2,7 +2,7 @@
     {
         "id": "aaaa00",
         "name": "John Smith",
-        "password": "unsecuredPassword1234",
+        "password": "!unsecu@edPard1234",
         "playlists": [
             {
                 "id": "00001",

@@ -3,6 +3,7 @@
     "module": "commonjs",
     "esModuleInterop": true,
     "allowJs": true,
+    "strictPropertyInitialization": false,
     "allowSyntheticDefaultImports": true,
     "target": "es6",
     "strict": true,
@@ -12,6 +13,7 @@
     "resolveJsonModule": true,
     "noImplicitAny": false
   },
+  "files":["./src/custom.d.ts"],
   "include": [
     "src"
   ]

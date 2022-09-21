@@ -1,9 +1,6 @@
 const fs = require('fs')
 
-export function writeDataToFile(filename, content) {
-    fs.writeFileSync(filename, JSON.stringify(content), 'utf8', (err) => {
-        if(err) {
-            console.log(err)
-        }
-    })
+export function verifyUser(currentUser: string, user: string): any {
+    if (currentUser !== user) return { code: 401, message: 'You are not authorized.' } as any;
+    return true;
 }

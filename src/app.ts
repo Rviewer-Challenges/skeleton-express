@@ -1,18 +1,20 @@
 #!/usr/bin/env node
-import { loadEndpoints } from "./controllers/api";
+import { basicAuth } from "./middleware/basicAuth";
 
 const express = require('express')
 const bodyParser = require('body-parser');
 const cors = require('cors')
+const users = require('./controllers/users')
 require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 8001;
 
 app.use(bodyParser.json());
-app.use(cors())
-app.set('port', port)
+app.use(cors());
+app.use(basicAuth);
+app.set('port', port);
 
-loadEndpoints(app)
+app.use('/users', users);
 
 export default app;
