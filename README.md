@@ -1,25 +1,5 @@
 <img align="left"  width="150" height="150" src=".github/rviewer_logo--dark.png" />
 
-## Rviewer skeleton: Express
-
-[![Twitter](https://img.shields.io/badge/rviewer__-%231DA1F2.svg?style=for-the-badge&logo=Twitter&logoColor=white)](https://twitter.com/Rviewer_/)
-
-[![Rviewer Discord](https://badgen.net/discord/members/VVN4ur8FaQ)](https://discord.gg/VVN4ur8FaQ)
-<br/>
-
-This repository is a Backend Javascript & Typescript skeleton with Express, designed for quickly getting started
-developing an API. Check the [Getting Started](#getting-started) for full details.
-
-## Technologies
-
-* [Typescript 4.7](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-4-4.html)
-* [Express 4.18](https://expressjs.com/)
-* [Yarn](https://yarnpkg.com/)
-* [Supertest](https://github.com/visionmedia/supertest#readme)
-* [JEST](https://jestjs.io/es-ES/)
-* [Docker](https://www.docker.com/)
-* [Make](https://www.gnu.org/software/make/manual/make.html)
-
 ## Getting Started
 
 Within the [Makefile](Makefile) you can handle the entire flow to get everything up & running:
@@ -32,45 +12,43 @@ As you could see on the [Makefile](Makefile) script, you could just avoid those 
 **deps** are dependant of it.
 
 Once these steps are finished, you could access to the application navigating
-into [http://localhost:8000/ping](http://localhost:8000/ping).
+into [http://localhost:8000/users](http://localhost:8000/users).
 
-## Overview
+## Description
 
-This skeleton is based on
-a [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) approach, so you
-could find the first basic elements:
+With this API you can create playlists for your user account with Spotlist
+Functions include:
+  - create a new list 
+  - add new songs to an already existing list
+  - find and display all your current lists
+  - find a single list and display it
 
-> You could
-> [find here an amazing article](https://bazaglia.com/clean-architecture-with-typescript-ddd-onion/) explaining this
-> Clean Architecture with Node.js! (credits to [@bazaglia](https://github.com/bazaglia)).
+You must be authorized to interact with your lists, do this by using a Basic authorization header to your calls, using the "name" and "password" linked to your account. 
 
-### Controllers layer
+Passwords are strength protected, so make sure to use a strong password.
 
-This folder contains the basic routes to expose in your API. You could add here as much HTTP routes as you need.
+Enjoy and start creating some cool playlists with Spotlist!
 
-### Domain layer
+## Endpoints
 
-This layer is the one in charge of the different use cases of the application. A Use Case it's a workflow of what should
-it happen to a concrete Domain entity once interacts with the application.
+(GET) - get all lists for a user
+`/:userid/lists`
 
-This is the layer which would use any external service and communicate with the world (ie. APIs, databases, etc...)
+(POST) - create a new list for a user
+`/:userid/lists` 
+body = {
+  "name": 'your list name',
+  "songs": [can be empty or array of songs]
+}
 
-### Domain layer
+(GET) - get a specific list for a user
+`/:userid/:listId` 
 
-Any of your domain Entities that models your business logic. These classes should be completely isolated of any external
-dependency or framework.
+(POST) - add song to a list
+`/:userid/lists/:listid/songs`
+body = {
+    "artist": "your new artist",
+    "title": "your new title"
+}
 
-## Support
 
-If you are having problems or need anything else, please let us know by
-[raising a new issue](https://github.com/Rviewer-Challenges/skeleton-express/issues/new/choose).
-
-## License
-
-This project is licensed with the [MIT license](LICENSE).
-
---- 
-
-<p align="center">
-  Made with ❤️ by <a href="https://rviewer.io">Rviewer</a>
-</p>
