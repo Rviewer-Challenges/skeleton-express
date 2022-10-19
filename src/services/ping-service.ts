@@ -1,7 +1,11 @@
-import { Pong } from "../domain/pong.js";
+import { injectable } from "inversify";
+import { Pong } from '../domain/pong';
+import PingPongResponse from "../models/ping-pong-response";
 
+@injectable()
 export class PingService {
-    public getPing(): object {
+
+    async getPing(): Promise<PingPongResponse> {
         return (new Pong()).unmarshal()
     }
 }

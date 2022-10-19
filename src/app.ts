@@ -1,17 +1,34 @@
-#!/usr/bin/env node
-import { loadEndpoints } from "./controllers/api";
+import 'reflect-metadata';
+import * as bodyParser from 'body-parser';
+import cors from 'cors';
+import { getEnvironment } from './configs/env-selector';
+import { Container } from 'inversify';
+import { InversifyExpressServer } from 'inversify-express-utils';
+import { PingService } from './services/ping-service';
+import TYPES from './constants/types-constants';
 
-const express = require('express')
-const bodyParser = require('body-parser');
-const cors = require('cors')
+//Import controllers
+import './controllers/ping-controller';
 
-const app = express();
-const port = process.env.PORT || 8000;
+getEnvironment();
 
-app.use(bodyParser.json());
-app.use(cors())
-app.set('port', port)
+let container = new Container();
 
-loadEndpoints(app)
+//Bind services
+container.bind<PingService>(TYPES.PingService).to(PingService);
 
-export default app;
+let server = new InversifyExpressServer(container);
+server.setConfig((app) => {
+    app.use(bodyParser.urlencoded({
+        extended: true
+    }));
+    app.use(cors())
+    app.use(bodyParser.json());
+});
+
+let serverInstance = server.build();
+serverInstance.listen(process.env.APP_PORT || 3000, () => {
+    console.log(`Server started on port ${process.env.APP_PORT}`);
+    console.log(`Environment: ${process.env.NODE_ENV}`);
+    console.log('Press CTRL-C to stop')
+});
