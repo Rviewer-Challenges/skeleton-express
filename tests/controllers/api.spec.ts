@@ -1,15 +1,24 @@
 import request from 'supertest';
 
-import app from "../../src/app";
-import { Pong } from "../../src/domain/pong.js"
+import serverInstance from "../../src/app";
+import ResponseFormatter from "../../src/helpers/Response";
+import PingPongResponse from "../../src/models/ping-pong-response";
 
 
 describe('GET /ping', () => {
+
     it('should return 200 OK', () => {
-        return request(app).get('/ping').expect(200)
+        return request(serverInstance).get('/ping').expect(200)
     });
 
-    it('should return `pong` in response', () => {
-        return request(app).get('/ping').expect(new Pong().unmarshal())
+    it('should return `pong` in response', async () => {
+        const expectedResponse =
+            ResponseFormatter
+            .create<PingPongResponse>(new PingPongResponse('pong'))
+            .toJson()
+
+        return request(serverInstance)
+            .get('/ping')
+            .expect(expectedResponse)
     });
 });

@@ -5,11 +5,10 @@
   "author": "Rviewer Team (help@rviewer.io)",
   "license": "MIT",
   "scripts": {
-    "start": "ts-node-dev --respawn src/app.ts",
-    "start:local": "SKELETON_ENV=local ts-node-dev src/app.ts",
-    "start:dev": "SKELETON_ENV=develop ts-node-dev --respawn src/app.ts",
-    "start:prod": "SKELETON_ENV=production ts-node-dev --respawn src/app.ts",
-    "start:test": "SKELETON_ENV=test ts-node-dev --respawn src/app.ts",
+    "start": "ts-node-dev --respawn src/server.ts",
+    "start:local": "SKELETON_ENV=local ts-node-dev src/server.ts",
+    "start:dev": "SKELETON_ENV=develop ts-node-dev --respawn src/server.ts",
+    "start:prod": "SKELETON_ENV=production ts-node-dev --respawn src/server.ts",
     "test": "jest"
   },
   "dependencies": {

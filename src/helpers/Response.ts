@@ -8,4 +8,8 @@ export default class Response<T> {
     public static create<T>(response: T): Response<T> {
         return new Response<T>(response);
     }
+
+    public toJson(): string {
+        return JSON.stringify(this);
+    }
 }

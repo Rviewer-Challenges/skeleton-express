@@ -15,4 +15,4 @@ services:
       - "8000:8000"
     volumes:
       - "${PWD}:/opt/app"
-    entrypoint: ["yarn", "start"]
+    entrypoint: ["yarn", "start:dev"]

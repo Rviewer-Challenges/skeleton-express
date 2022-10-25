@@ -26,9 +26,6 @@ server.setConfig((app) => {
     app.use(bodyParser.json());
 });
 
-let serverInstance = server.build();
-serverInstance.listen(process.env.APP_PORT || 3000, () => {
-    console.log(`Server started on port ${process.env.APP_PORT}`);
-    console.log(`Environment: ${process.env.NODE_ENV}`);
-    console.log('Press CTRL-C to stop')
-});
+const serverInstance = server.build();
+
+export default serverInstance
